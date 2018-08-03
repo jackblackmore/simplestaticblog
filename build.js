@@ -7,10 +7,10 @@ const ejsRenderFile = promisify(ejs.renderFile);
 const globP = promisify(require('glob'));
 const frontMatter = require('front-matter');
 const marked = require('marked');
-const config = require('../site.config');
+const config = require('./site.config');
 
-const srcPath = '../src';
-const distPath = '../public';
+const srcPath = './src';
+const distPath = './public';
 
 // clear destination folder
 fse.emptyDirSync(distPath);
@@ -19,7 +19,7 @@ fse.emptyDirSync(distPath);
 fse.copy(`${srcPath}/assets`, `${distPath}/assets`);
 
 // read page templates
-globP('**/*.@(md|ejs|html)', {cwd: `${srcPath}/pages`})
+globP('**/*.@(md|ejs|html)', {cwd: `${srcPath}/content`})
     .then((files) => {
         files.forEach((file) => {
             const fileData = path.parse(file);
@@ -29,7 +29,7 @@ globP('**/*.@(md|ejs|html)', {cwd: `${srcPath}/pages`})
             fse.mkdirs(destPath)
                 .then(() => {
                     // read page file
-                    return fse.readFile(`${srcPath}/pages/${file}`, 'utf-8')
+                    return fse.readFile(`${srcPath}/content/${file}`, 'utf-8')
                 })
                 .then((data) => {
                     // extract front matter
