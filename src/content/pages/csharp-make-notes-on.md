@@ -1,7 +1,6 @@
 ---
 title:: CSharp point to make notes on
 tags: csharp    
-date: 2018-08-02
 ---
 Bits and bobs to make notes on in CSharp
 

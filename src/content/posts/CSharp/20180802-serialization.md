@@ -7,19 +7,49 @@ date: 2018-08-02
 # XML Serialization
 - Uses `System.Xml.Serialization`
 - Creates clean XML that can be used and edited as a configuration file
+- You can use [https://xmltocsharp.azurewebsites.net/](https://xmltocsharp.azurewebsites.net/) to create classes to serialize into.
 
 ### Serialize()
 
 ### DeSerialize()
 
-### Example Class
+### Example 
+```xml
+<xml>
+    <Configuration>
+        <Person>
+            <Name FirstName="Birt" Surname="Muppet"/>
+            <Age>105</Age>
+            <Friends>
+                <Person>
+                    <Name FirstName="Ernie" Surname="Muppet">
+                    <Age>109</Age>
+                </Person>
+            </Friends>
+        </Person>
+    </Configuration>
+</xml>
+```
+
 
 ```cs
-    public class MyClass()
+    
+    public class Person()
     {
-        [XmlElement] public string Name { get; set;}
-        [XmlAttribute("Age")] public int Age { get; set; }
+
+        [XmlAttribute] public int Age { get; set; }
+        [XmlElement] public Name Name { get; set;}
+        public List<Person> Friends { get; set; }
+        
     }
+
+    public class Name() 
+    {
+        [XmlAttribute] public string FirstName { get; set; }
+        [XmlAttribute] public string Sirname { get; set; }
+    }
+
+
 ```
 
 
